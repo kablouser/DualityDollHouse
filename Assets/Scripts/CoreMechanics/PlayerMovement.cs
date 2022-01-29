@@ -12,10 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Variables")]
     [SerializeField] private float _walkTopSpeed;
 
-    [Tooltip("How fast player grinds to a halt horizontally when on the ground")]
+    [Tooltip("How fast player speeds up on the ground to _walkTopSpeed")]
     [SerializeField] private float _walkAcceleration;
-    [Tooltip("How fast player grinds to a halt horizontally when on the ground")]
+    [Tooltip("How player grinds to a halt horizontally when on the ground")]
     [SerializeField] private float _walkDeceleration;
+
+    [Tooltip("Horizontal acceleration whilst air-bourne")]
+    [SerializeField] private float _midairAcceleration;
 
     [SerializeField] private float _jumpHeight;
 
@@ -112,51 +115,55 @@ public class PlayerMovement : MonoBehaviour
         UpdateIsGrounded();
 
         if (_isGrounded)
+            MoveHorizontally(_walkAcceleration, _walkDeceleration);
+        else
+            MoveHorizontally(_midairAcceleration, 0);
+    }
+
+    private void MoveHorizontally(float acceleration, float decceleration)
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float desiredVelocityX = horizontalInput * _walkTopSpeed;
+        float velocityX = _rigidbody2D.velocity.x;
+
+        // allow horizontal movement
+        // are we already moving faster than our desiredVelocityX?
+        bool isFasterThanDesired =
+            // if signs of desiredVelocityX velocityX are same
+            Mathf.Sign(desiredVelocityX) == Mathf.Sign(velocityX) &&
+            Mathf.Abs(desiredVelocityX) < Mathf.Abs(velocityX);
+
+        if (isFasterThanDesired || Mathf.Approximately(desiredVelocityX, 0))
         {
-            // allow horizontal movement
+            // brake
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float desiredVelocityX = horizontalInput * _walkTopSpeed;
-            float velocityX = _rigidbody2D.velocity.x;
+            // calculation always moves velocityX towards the direction of 0
+            float decceleratedVelocityX = velocityX - Mathf.Sign(velocityX) * decceleration * Time.fixedDeltaTime;
+            // this could overshoot
 
-            // are we already moving faster than our desiredVelocityX?
-            bool isFasterThanDesired =
-                // if signs of desiredVelocityX velocityX are same
-                Mathf.Sign(desiredVelocityX) == Mathf.Sign(velocityX) &&
-                Mathf.Abs(desiredVelocityX) < Mathf.Abs(velocityX);
+            // check overshoot, if signs have changed
+            if (Mathf.Sign(decceleratedVelocityX) != Mathf.Sign(velocityX))
+                decceleratedVelocityX = 0;
 
-            if (isFasterThanDesired || Mathf.Approximately(desiredVelocityX, 0))
-            {
-                // brake
+            float impulseX = decceleratedVelocityX - velocityX;
+            _rigidbody2D.AddForce(new Vector2(impulseX, 0), ForceMode2D.Impulse);
+        }
+        else
+        {
+            // walk
 
-                // calculation always moves velocityX towards the direction of 0
-                float decceleratedVelocityX = velocityX - Mathf.Sign(velocityX) * _walkDeceleration * Time.fixedDeltaTime;
-                // this could overshoot
+            // calculation always moves velocityX towards the direction of desiredVelocityX
+            float acceleratedVelocityX = velocityX + Mathf.Sign(desiredVelocityX) * acceleration * Time.fixedDeltaTime;
+            // this could overshoot
 
-                // check overshoot, if signs have changed
-                if (Mathf.Sign(decceleratedVelocityX) != Mathf.Sign(velocityX))
-                    decceleratedVelocityX = 0;
+            // check if overshooting, if signs are the same
+            if (Mathf.Sign(desiredVelocityX) == Mathf.Sign(acceleratedVelocityX) &&
+                // absolute has gone beyond
+                Mathf.Abs(desiredVelocityX) < Mathf.Abs(acceleratedVelocityX))
+                acceleratedVelocityX = desiredVelocityX;
 
-                float impulseX = decceleratedVelocityX - velocityX;
-                _rigidbody2D.AddForce(new Vector2(impulseX, 0), ForceMode2D.Impulse);
-            }
-            else
-            {
-                // walk
-
-                // calculation always moves velocityX towards the direction of desiredVelocityX
-                float acceleratedVelocityX = velocityX + Mathf.Sign(desiredVelocityX) * _walkAcceleration * Time.fixedDeltaTime;
-                // this could overshoot
-
-                // check if overshooting, if signs are the same
-                if (Mathf.Sign(desiredVelocityX) == Mathf.Sign(acceleratedVelocityX) &&
-                    // absolute has gone beyond
-                    Mathf.Abs(desiredVelocityX) < Mathf.Abs(acceleratedVelocityX))
-                    acceleratedVelocityX = desiredVelocityX;
-
-                float impulseX = acceleratedVelocityX - velocityX;
-                _rigidbody2D.AddForce(new Vector2(impulseX, 0), ForceMode2D.Impulse);
-            }
+            float impulseX = acceleratedVelocityX - velocityX;
+            _rigidbody2D.AddForce(new Vector2(impulseX, 0), ForceMode2D.Impulse);
         }
     }
 
