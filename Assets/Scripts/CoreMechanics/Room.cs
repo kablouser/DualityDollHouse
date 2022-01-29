@@ -75,6 +75,7 @@ public class Room : MonoBehaviour
 
         if (handAnimated)
         {
+            _handObject.SetVisible(true);
             _handObject.transform.position = new Vector3(startPosition.x + 1.1f,
               startPosition.y - 1.2f, -.81f);
 
@@ -103,7 +104,14 @@ public class Room : MonoBehaviour
 
         _handObject.PlayAnimSynchronous("PutDown");
 
+
         moveTarget.position = endPosition;
         onReached?.Invoke();
+
+        while (!_handObject.animFinished)
+        {
+            yield return null;
+        }
+        _handObject.SetVisible(false);
     }
 }

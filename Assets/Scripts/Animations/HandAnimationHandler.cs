@@ -6,6 +6,7 @@ public class HandAnimationHandler : MonoBehaviour
 {
 
     private Animator anim;
+    [SerializeField] private Renderer _renderer;
     public bool animFinished = false;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,11 @@ public class HandAnimationHandler : MonoBehaviour
     public void FinishHandAnimation(int i)
     {
         animFinished = true;
+    }
+
+    public void SetVisible(bool visible)
+    {
+        _renderer.enabled = visible;
     }
 
 }

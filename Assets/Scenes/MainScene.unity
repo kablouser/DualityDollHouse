@@ -705,6 +705,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!137 &1496068433 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5011793251343644156, guid: 44df692ce1b73664db843764e47bb63a, type: 3}
+  m_PrefabInstance: {fileID: 396893938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529661554 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 44df692ce1b73664db843764e47bb63a, type: 3}
@@ -722,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93fe666582ef5841ac2cf6a7261e5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 1496068433}
   animFinished: 1
 --- !u!1 &1997763257
 GameObject:
