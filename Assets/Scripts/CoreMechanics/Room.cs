@@ -23,7 +23,7 @@ public class Room : MonoBehaviour
         if (_isFirstRoom)
         {
             sceneSingletons.PlayerMovement.transform.position = (Vector2)transform.position + EntrancePosition;
-            BeginFramingCamera(0);            
+            BeginFramingCamera(0);
         }
     }
 
