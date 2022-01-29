@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private Collider2D _collider2D;
+    [SerializeField] private SceneSingletons sceneSingletons;
 
     [Header("Variables")]
     [SerializeField] private float _walkTopSpeed;
@@ -29,6 +31,12 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpVelocity;
 
     private bool isVerticalPressed;
+
+    public void SetGrabbed(bool isGrabbed)
+    {
+        _rigidbody2D.isKinematic = isGrabbed;
+        _collider2D.enabled = !isGrabbed;
+    }
 
     private void CalculateJumpVelocity()
     {
@@ -64,6 +72,9 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = false;
         isVerticalPressed = false;
         CalculateJumpVelocity();
+
+        sceneSingletons.MainCamera = Camera.main;
+        sceneSingletons.PlayerMovement = this;
     }
 
     private void OnValidate()
