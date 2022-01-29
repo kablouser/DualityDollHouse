@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -9,6 +10,10 @@ public class LightSourceDetection : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private float angle = 60.0f;
     [SerializeField] private Light2D lightObject;
+
+    public event Action LightSourceDetectedEvent;
+    public event Action LightSourceUndetectedEvent;
+    private bool detected = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +42,21 @@ public class LightSourceDetection : MonoBehaviour
                 if (hit.collider == playerCollider)
                 {
                     hitReaction();
+                    if (!detected)
+                    {
+                        //change status to detected and broadcast event
+                        detected = true;
+                        LightSourceDetectedEvent.Invoke();
+                    }
                     return;
                 }
             }
+        }
+        if (detected)
+        {
+            //change status to undetected
+            detected = false;
+            LightSourceUndetectedEvent.Invoke();
         }
         lightObject.color = Color.white;
     }
