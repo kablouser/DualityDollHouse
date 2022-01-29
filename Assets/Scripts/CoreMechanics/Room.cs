@@ -18,10 +18,13 @@ public class Room : MonoBehaviour
     [SerializeField] private float _restartDuration = 1;
     [SerializeField] private float _cameraFrameDuration = 1;
 
-    private void Awake()
+    private void Start()
     {
-        if(_isFirstRoom)
-            BeginFramingCamera(0);
+        if (_isFirstRoom)
+        {
+            sceneSingletons.PlayerMovement.transform.position = (Vector2)transform.position + EntrancePosition;
+            BeginFramingCamera(0);            
+        }
     }
 
     public void OnValidate()
@@ -40,7 +43,7 @@ public class Room : MonoBehaviour
         Transform camera = sceneSingletons.MainCamera.transform;
 
         // frame camera around center
-        Vector3 cameraNewPosition = transform.position + (Vector3)Center;
+        Vector3 cameraNewPosition = transform.position + (Vector3)Center;        
         cameraNewPosition.z = camera.transform.position.z;
         StartCoroutine(SmoothedMoveRoutine(camera.transform, cameraNewPosition, duration, onReached));
     }
@@ -75,6 +78,7 @@ public class Room : MonoBehaviour
             time = Time.time;
         }
 
+        moveTarget.position = endPosition;
         onReached?.Invoke();
     }
 }

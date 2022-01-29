@@ -46,7 +46,7 @@ public class LightSourceDetection : MonoBehaviour
                     {
                         //change status to detected and broadcast event
                         detected = true;
-                        LightSourceDetectedEvent.Invoke();
+                        LightSourceDetectedEvent?.Invoke();
                     }
                     return;
                 }
@@ -56,7 +56,7 @@ public class LightSourceDetection : MonoBehaviour
         {
             //change status to undetected
             detected = false;
-            LightSourceUndetectedEvent.Invoke();
+            LightSourceUndetectedEvent?.Invoke();
         }
         lightObject.color = Color.white;
     }
