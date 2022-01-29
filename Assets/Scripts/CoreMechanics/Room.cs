@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     public Vector2 Size = Vector2.one;
     public Vector2 Center;
 
+
     [SerializeField] private Transform _entranceRenderer;
     [SerializeField] private SceneSingletons sceneSingletons;
     [SerializeField] private bool _isFirstRoom;
@@ -18,7 +19,7 @@ public class Room : MonoBehaviour
     [SerializeField] private float _restartDuration = 1;
     [SerializeField] private float _cameraFrameDuration = 1;
 
-    [SerializeField] private GameObject _handObject;
+    [SerializeField] private HandAnimationHandler _handObject;
 
     private void Start()
     {
@@ -70,6 +71,20 @@ public class Room : MonoBehaviour
         AnimationCurve curve = AnimationCurve.EaseInOut(time, 0, timeEnd, 1);
         Vector3 startPosition = moveTarget.position;
 
+        bool handAnimated = (moveTarget == sceneSingletons.PlayerMovement.transform);
+
+        if (handAnimated)
+        {
+            _handObject.transform.position = new Vector3(startPosition.x + 1.1f,
+              startPosition.y - 1.2f, -.81f);
+
+            _handObject.PlayAnimSynchronous("PickUp");
+
+            while (!_handObject.animFinished)
+            {
+                yield return null;
+            }
+        }
 
         while (time < timeEnd)
         {
@@ -85,6 +100,8 @@ public class Room : MonoBehaviour
             yield return null;
             time = Time.time;
         }
+
+        _handObject.PlayAnimSynchronous("PutDown");
 
         moveTarget.position = endPosition;
         onReached?.Invoke();
