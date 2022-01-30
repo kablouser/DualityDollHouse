@@ -28,7 +28,7 @@ public class LightPatterner : MonoBehaviour
     {
         int currentBarNumber = _sceneSingletons.GetMusicBar(_patternLength);
 
-        foreach(PatternedLight patternedLight in _patternedLights)
+        foreach (PatternedLight patternedLight in _patternedLights)
         {
             if (currentBarNumber < patternedLight.switchPattern.Length)
                 // set to pattern
@@ -43,7 +43,7 @@ public class LightPatterner : MonoBehaviour
             // if switch pattern wants to play audio cue
             audioCueSwitchPattern[currentBarNumber])
         {
-            if(audioCueSource.isPlaying == false)
+            if (audioCueSource.isPlaying == false)
                 audioCueSource.Play();
         }
         else
