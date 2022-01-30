@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,15 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool IsFrozen { get; private set; }
 
-    public bool IsCarryingKey;
+    public bool IsCarryingKey
+    {
+        get => _isCarryingKey;
+        set
+        {
+            _isCarryingKey = value;
+            sceneSingletons.InvokeOnKeyChanged(value);
+        }
+    }
 
     [Header("References")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -42,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpVelocity;
 
     private bool isVerticalPressed;
+
+    public bool _isCarryingKey;
 
     /// <summary>
     /// the beginning time at the latest period when stopped,

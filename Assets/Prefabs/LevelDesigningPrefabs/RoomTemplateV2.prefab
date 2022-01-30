@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextRoom: {fileID: 0}
+  isKeyRequired: 0
 --- !u!1 &899292754335154151
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +951,7 @@ MonoBehaviour:
   - {fileID: 899292753570815165}
   _resetPositionsMemory:
   - {x: 0, y: 0, z: 0}
+  _setActivesOnRestart: []
 --- !u!1 &7104661883328170698
 GameObject:
   m_ObjectHideFlags: 0

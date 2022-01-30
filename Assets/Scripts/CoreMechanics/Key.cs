@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+    [SerializeField] private SceneSingletons _sceneSingletons;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMovement player = collision.attachedRigidbody.GetComponent<PlayerMovement>();

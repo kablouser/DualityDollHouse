@@ -16,6 +16,9 @@ public class SceneSingletons : ScriptableObject
     public event LightSourceEvent LightSourceDetectedEvent;
     public event LightSourceEvent LightSourceUndetectedEvent;
 
+    public delegate void KeyEvent(bool isCarryingKey);
+    public event KeyEvent OnKeyChanged;
+
     public void InvokeLightSourceDetectedEvent(GameObject lightSource)
     {
         LightSourceDetectedEvent?.Invoke(lightSource);
@@ -24,5 +27,10 @@ public class SceneSingletons : ScriptableObject
     public void InvokeLightSourceUndetectedEvent(GameObject lightSource)
     {
         LightSourceUndetectedEvent?.Invoke(lightSource);
+    }
+
+    public void InvokeOnKeyChanged(bool isCarryingKey)
+    {
+        OnKeyChanged?.Invoke(isCarryingKey);
     }
 }
