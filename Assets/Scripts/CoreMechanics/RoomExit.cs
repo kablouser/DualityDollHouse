@@ -9,10 +9,14 @@ public class RoomExit : MonoBehaviour
     [SerializeField] private Sprite _lockedDoorSprite;
     [SerializeField] private SceneSingletons _sceneSingletons;
 
-    #if UNITY_EDITOR
+    //audio stuff
+    [SerializeField] private AudioClip _collectSound;
+    [SerializeField] private AudioSource _audioSource;
+
+#if UNITY_EDITOR
     private void Awake()
     {
-        if(nextRoom == null)
+        if (nextRoom == null)
             Debug.LogWarning("RoomExit's nextRoom is not setup!", this);
         SetLocked(isKeyRequired);
     }
@@ -31,12 +35,18 @@ public class RoomExit : MonoBehaviour
     private void OnKeyChanged(bool isCarryingKey)
     {
         SetLocked(isKeyRequired && isCarryingKey == false);
+
+        if (isCarryingKey && _audioSource != null && _audioSource.enabled)
+        {
+            _audioSource.clip = _collectSound;
+            _audioSource.Play();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerMovement player = other.attachedRigidbody.GetComponent<PlayerMovement>();
-        if(player && nextRoom)
+        if (player && nextRoom)
         {
             // check key if needed
             if (isKeyRequired && player.IsCarryingKey == false)

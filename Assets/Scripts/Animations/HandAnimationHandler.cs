@@ -43,14 +43,20 @@ public class HandAnimationHandler : MonoBehaviour
 
     public void PlaySoundGrab()
     {
-        _audioSource.clip = _grabSound;
-        _audioSource.PlayDelayed(.3f);
+        if (_audioSource.isActiveAndEnabled)
+        {
+            _audioSource.clip = _grabSound;
+            _audioSource.PlayDelayed(.3f);
+        }
     }
 
     public void PlaySoundDrop()
     {
-        _audioSource.clip = _releaseSound;
-        _audioSource.Play();
+        if (_audioSource.isActiveAndEnabled)
+        {
+            _audioSource.clip = _releaseSound;
+            _audioSource.Play();
+        }
     }
 
 }

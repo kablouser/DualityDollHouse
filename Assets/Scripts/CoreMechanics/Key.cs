@@ -4,9 +4,6 @@ public class Key : MonoBehaviour
 {
     [SerializeField] private SceneSingletons _sceneSingletons;
 
-    //audio stuff
-    [SerializeField] private AudioClip _collectSound;
-    [SerializeField] private AudioSource _audioSource;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,10 +12,6 @@ public class Key : MonoBehaviour
         if (player && player.IsCarryingKey == false)
         {
             player.IsCarryingKey = true;
-
-            _audioSource.clip = _collectSound;
-            _audioSource.Play();
-
             gameObject.SetActive(false);
         }
     }
