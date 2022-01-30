@@ -154,13 +154,20 @@ public class PlayerMovement : MonoBehaviour
             // jump button has same effect as up direction
             if (Input.GetButtonDown("Jump") || getVerticalDown)
             {
-                _audioSource.clip = _jumpSound;
-                _audioSource.Play();
                 // stop further jump inputs, because Update could be faster than FixedUpdate
                 _isGrounded = false;
                 float velocityY = _rigidbody2D.velocity.y;
                 float impulseY = _jumpVelocity - velocityY;
                 _rigidbody2D.AddForce(new Vector2(0, impulseY), ForceMode2D.Impulse);
+
+                //play jump sound
+                _audioSource.clip = _jumpSound;
+                _audioSource.Play();
+            }
+            else if (!Mathf.Approximately(_rigidbody2D.velocity.x, .0f) && !_audioSource.isPlaying)
+            {
+                _audioSource.clip = _walkSound;
+                _audioSource.Play();
             }
         }
     }
