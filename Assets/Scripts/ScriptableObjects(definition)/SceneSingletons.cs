@@ -8,4 +8,6 @@ public class SceneSingletons : ScriptableObject
 {
     public Camera MainCamera;
     public PlayerMovement PlayerMovement;
+    public AudioSource musicPlayer;
+    public float musicBPM;
 }

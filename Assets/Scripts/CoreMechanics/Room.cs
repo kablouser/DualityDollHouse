@@ -10,7 +10,6 @@ public class Room : MonoBehaviour
     public Vector2 Size = Vector2.one;
     public Vector2 Center;
 
-
     [SerializeField] private Transform _entranceRenderer;
     [SerializeField] private SceneSingletons sceneSingletons;
     [SerializeField] private bool _isFirstRoom;
