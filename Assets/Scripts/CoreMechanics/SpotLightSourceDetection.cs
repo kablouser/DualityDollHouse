@@ -11,7 +11,8 @@ public class SpotLightSourceDetection : MonoBehaviour
 
     private void OnValidate()
     {
-        transform.position = _pathCreator.path.GetPointAtDistance(_pathBeginOffset);
+        if (_pathCreator != null)
+            transform.position = _pathCreator.path.GetPointAtDistance(_pathBeginOffset);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -32,6 +33,7 @@ public class SpotLightSourceDetection : MonoBehaviour
 
     private void Update()
     {
-        transform.position = _pathCreator.path.GetPointAtDistance(_pathBeginOffset + Time.time * _pathingSpeed);
+        if (_pathCreator != null)
+            transform.position = _pathCreator.path.GetPointAtDistance(_pathBeginOffset + Time.time * _pathingSpeed);
     }
 }

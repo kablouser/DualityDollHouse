@@ -16,9 +16,17 @@ public class LightPatterner : MonoBehaviour
     [SerializeField] private AudioSource audioCueSource;
     [SerializeField] private bool[] audioCueSwitchPattern;
 
+    [SerializeField] private int _patternLength;
+
+    private void Awake()
+    {
+        foreach(PatternedLight light in _patternedLights)
+            _patternLength = Mathf.Max(_patternLength, light.switchPattern.Length);
+    }
+
     private void Update()
     {
-        int currentBarNumber = _sceneSingletons.GetMusicBar();
+        int currentBarNumber = _sceneSingletons.GetMusicBar(_patternLength);
 
         foreach(PatternedLight patternedLight in _patternedLights)
         {

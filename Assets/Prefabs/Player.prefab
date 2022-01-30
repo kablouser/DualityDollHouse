@@ -206,7 +206,7 @@ MonoBehaviour:
   _walkDeceleration: 40
   _midairAcceleration: 10
   _jumpHeight: 2
-  _timeToFreeze: 2
+  _timeToFreeze: 1
   _isCarryingKey: 0
   _audioSource: {fileID: 1724528177}
   _walkSound: {fileID: 8300000, guid: 724a84f4378ddda4694e75bf66d2b320, type: 3}

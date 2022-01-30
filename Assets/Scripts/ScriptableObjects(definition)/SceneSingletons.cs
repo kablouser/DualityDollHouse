@@ -54,7 +54,7 @@ public class SceneSingletons : ScriptableObject
     /// So 4 bar music would return [0,1,2,3] and repeat.
     /// </summary>
     /// <returns>range [0,MusicBars-1]</returns>
-    public int GetMusicBar()
+    public int GetMusicBar(int bars = 4)
     {
         #if UNITY_EDITOR
         if(MusicBPM == 0)
@@ -71,6 +71,6 @@ public class SceneSingletons : ScriptableObject
             MusicPlayer.time *
             // convert BPM to BPS (beats per second)
             MusicBPM / 60.0f);
-        return beat % Mathf.Max(1,MusicBars);
+        return beat % Mathf.Max(1,bars);
     }
 }
