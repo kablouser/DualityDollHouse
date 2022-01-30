@@ -18,17 +18,18 @@ public class LightPatterner : MonoBehaviour
     /// </summary>
     private int _patternLength;
 
+
     private void Awake()
     {
         _patternLength = 0;
-        foreach(PatternedLight patternedLight in _patternedLights)
+        foreach (PatternedLight patternedLight in _patternedLights)
             _patternLength = Mathf.Max(_patternLength, patternedLight.switchPattern.Length);
     }
 
     private void Update()
     {
 #if UNITY_EDITOR
-        if(_sceneSingletons.MusicBPM == 0)
+        if (_sceneSingletons.MusicBPM == 0)
         {
             Debug.LogWarning("Music BPM is set to 0 in sceneSingletons. That will not sync lights properly...");
         }
@@ -42,7 +43,7 @@ public class LightPatterner : MonoBehaviour
 
         // out of beat length
         int currentBeatID = beatNumber % _patternLength;
-        foreach(PatternedLight patternedLight in _patternedLights)
+        foreach (PatternedLight patternedLight in _patternedLights)
         {
             if (currentBeatID < patternedLight.switchPattern.Length)
                 // set to pattern
