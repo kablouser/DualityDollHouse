@@ -997,6 +997,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7104661884160320206, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_Intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7775357857881462361, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: playerCollider
       value: 

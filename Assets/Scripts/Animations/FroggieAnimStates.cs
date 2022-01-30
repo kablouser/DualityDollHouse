@@ -18,6 +18,13 @@ public class FroggieAnimStates : MonoBehaviour
 
     private bool _facingRight = true;
 
+    private AudioSource _jumpSound;
+
+    void Start()
+    {
+    }
+
+
     // Update is called once per frame
     void Update()
     {
