@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool IsCarryingKey;
+
     [Header("References")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private Collider2D _collider2D;
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
         _collider2D.enabled = !isGrabbed;
         _animator.enabled = !isGrabbed;
+        IsCarryingKey = false;
     }
 
     public bool IsMoving()
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         sceneSingletons.MainCamera = Camera.main;
         sceneSingletons.PlayerMovement = this;
+        IsCarryingKey = false;
     }
 
     private void OnValidate()
@@ -103,13 +107,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         sceneSingletons.LightSourceDetectedEvent -= LightSourceDetectedEvent;
+        // OnDisable gets called when travelling to new level
+        IsCarryingKey = false;
     }
-
-    public bool DEBUG;
 
     private void Update()
     {
-        DEBUG = IsMoving();
         float verticalInput = Input.GetAxisRaw("Vertical");
         bool getVerticalDown = !isVerticalPressed && 0 < verticalInput;
         if (0 < verticalInput)

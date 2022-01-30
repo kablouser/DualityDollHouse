@@ -24,6 +24,8 @@ public class Room : MonoBehaviour
     [SerializeField] private Transform[] _resetPositionsOnRestart;
     [HideInInspector] [SerializeField] private Vector3[] _resetPositionsMemory;
 
+    [SerializeField] private GameObject[] _setActivesOnRestart;
+
     private void Start()
     {
         OnValidate();
@@ -85,6 +87,9 @@ public class Room : MonoBehaviour
             // reset positions
             for (int i = 0; i < _resetPositionsOnRestart.Length; i++)
                 _resetPositionsOnRestart[i].position = _resetPositionsMemory[i];
+
+            foreach(GameObject setActive in _setActivesOnRestart)
+                setActive.SetActive(true);
         });
     }
 

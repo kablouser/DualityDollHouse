@@ -3,6 +3,7 @@ using UnityEngine;
 public class RoomExit : MonoBehaviour
 {
     [SerializeField] private Room nextRoom;
+    [SerializeField] private bool isKeyRequired;
 
 #if UNITY_EDITOR
     private void Awake()
@@ -17,6 +18,10 @@ public class RoomExit : MonoBehaviour
         PlayerMovement player = other.attachedRigidbody.GetComponent<PlayerMovement>();
         if(player && nextRoom)
         {
+            // check key if needed
+            if (isKeyRequired && player.IsCarryingKey == false)
+                return;
+
             // make player "disappear"
             player.gameObject.SetActive(false);
             nextRoom.BeginFramingCamera(1.0f,
