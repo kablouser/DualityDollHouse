@@ -7,16 +7,16 @@ public class FroggieAnimStates : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private Rigidbody2D _rigidbody;
 
+    [Tooltip("Base multiplier for how fast you want the animation to play, gets faster as player moves faster")]
+    [SerializeField] private float _movingBaseMultiplier = 1f;
+
+    [Tooltip("Base multiplier angle to rotate the jump animation by, its scales with velocity.x")]
+    [SerializeField] private float _jumpAngleBaseMultiplier = 6;
+
     private bool _isAirborne = false;
     private bool _isMoving = false;
 
     private bool _facingRight = true;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -44,7 +44,8 @@ public class FroggieAnimStates : MonoBehaviour
         }
 
         //set orientation
-        if (_rigidbody.velocity.x > distTolerance)
+        float velocityX = _rigidbody.velocity.x;
+        if (velocityX > distTolerance)
         {
             if (!_facingRight)
             {
@@ -52,7 +53,7 @@ public class FroggieAnimStates : MonoBehaviour
                 _facingRight = true;
             }
         }
-        else if (_rigidbody.velocity.x < -distTolerance)
+        else if (velocityX < -distTolerance)
         {
             if (_facingRight)
             {
@@ -61,9 +62,18 @@ public class FroggieAnimStates : MonoBehaviour
             }
         }
 
-
         //adjust animation parameters
         _isAirborne = !isGrounded;
-        _isMoving = Mathf.Abs(_rigidbody.velocity.x) > speedTolerance;
+        _isMoving = Mathf.Abs(velocityX) > speedTolerance;
+        _anim.SetFloat("MovingMultiplier", Mathf.Abs(velocityX) * _movingBaseMultiplier);
+
+        if (_isAirborne)
+        {
+            const float MAX_ANGLE = -30.0f;
+            float clampedAngle = Mathf.Max(MAX_ANGLE, -Mathf.Abs(velocityX) * _jumpAngleBaseMultiplier);
+            _anim.transform.localRotation = Quaternion.Euler(0, 0, clampedAngle);
+        }
+        else
+            _anim.transform.localRotation = Quaternion.identity;
     }
 }
