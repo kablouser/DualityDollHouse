@@ -8,6 +8,21 @@ public class SceneSingletons : ScriptableObject
 {
     public Camera MainCamera;
     public PlayerMovement PlayerMovement;
-    public AudioSource musicPlayer;
-    public float musicBPM;
+    public AudioSource MusicPlayer;
+    public float MusicBPM;
+    public Room CurrentRoom;
+
+    public delegate void LightSourceEvent(GameObject lightSource);
+    public event LightSourceEvent LightSourceDetectedEvent;
+    public event LightSourceEvent LightSourceUndetectedEvent;
+
+    public void InvokeLightSourceDetectedEvent(GameObject lightSource)
+    {
+        LightSourceDetectedEvent?.Invoke(lightSource);
+    }
+
+    public void InvokeLightSourceUndetectedEvent(GameObject lightSource)
+    {
+        LightSourceUndetectedEvent?.Invoke(lightSource);
+    }
 }

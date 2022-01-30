@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetGrabbed(bool isGrabbed)
     {
         _rigidbody2D.isKinematic = isGrabbed;
+        _rigidbody2D.velocity = Vector2.zero;
         _collider2D.enabled = !isGrabbed;
     }
 
@@ -84,6 +85,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Application.isPlaying)
             CalculateJumpVelocity();
+    }
+
+    private void OnEnable()
+    {
+        sceneSingletons.LightSourceDetectedEvent += LightSourceDetectedEvent;
+    }
+
+    private void OnDisable()
+    {
+        sceneSingletons.LightSourceDetectedEvent -= LightSourceDetectedEvent;
     }
 
     private void Update()
@@ -177,4 +188,12 @@ public class PlayerMovement : MonoBehaviour
     //            Gizmos.DrawRay(x.point, x.normal * 0.9f);
     //        }
     //}
+
+    private void LightSourceDetectedEvent(GameObject _)
+    {
+        if (sceneSingletons.CurrentRoom)
+            sceneSingletons.CurrentRoom.RestartRoom();
+        else
+            Debug.LogError("What have I detected a light when there's no current room?", this);
+    }
 }

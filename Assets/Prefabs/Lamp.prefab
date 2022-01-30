@@ -47,6 +47,7 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   angle: 60
   lightObject: {fileID: 684347659161809523}
+  _sceneSingletons: {fileID: 11400000, guid: 7f504d53970d9b6138f28d6a9751a6bd, type: 2}
 --- !u!1 &684347659161809525
 GameObject:
   m_ObjectHideFlags: 0

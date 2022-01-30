@@ -14,16 +14,27 @@ public class Room : MonoBehaviour
     [SerializeField] private SceneSingletons sceneSingletons;
     [SerializeField] private bool _isFirstRoom;
 
-    [Tooltip("Time taken to restart room")]
-    [SerializeField] private float _restartDuration = 1;
+    [Tooltip("Speed for hand to move player when restarting room")]
+    [Range(0.001f, 10.0f)]
+    [SerializeField] private float _restartSpeed = 1;
     [SerializeField] private float _cameraFrameDuration = 1;
 
     [SerializeField] private HandAnimationHandler _handObject;
 
+    [SerializeField] private Transform[] _resetPositionsOnRestart;
+    [HideInInspector] [SerializeField] private Vector3[] _resetPositionsMemory;
+
     private void Start()
     {
+        OnValidate();
+
+        // set memory to start positions
+        for (int i = 0; i < _resetPositionsOnRestart.Length; i++)
+            _resetPositionsMemory[i] = _resetPositionsOnRestart[i].position;
+
         if (_isFirstRoom)
         {
+            sceneSingletons.CurrentRoom = this;
             sceneSingletons.PlayerMovement.transform.position = (Vector2)transform.position + EntrancePosition;
             BeginFramingCamera(0);
         }
@@ -33,15 +44,27 @@ public class Room : MonoBehaviour
     {
         if (_entranceRenderer != null)
             _entranceRenderer.transform.position = transform.position + (Vector3)EntrancePosition;
+        // preallocate memory before start
+        if (_resetPositionsOnRestart != null &&
+            (_resetPositionsMemory == null ||
+            _resetPositionsMemory.Length != _resetPositionsOnRestart.Length))
+            _resetPositionsMemory = new Vector3[_resetPositionsOnRestart.Length];
     }
 
     public void BeginMovingTowardsEntrance(Transform target, System.Action onReached = null)
     {
-        StartCoroutine(SmoothedMoveRoutine(target, (Vector2)transform.position + EntrancePosition, _restartDuration, onReached));
+        Vector2 endPosition = (Vector2)transform.position + EntrancePosition;
+        // duration for moving animation part
+        float duration = Vector2.Distance(target.position, endPosition) / _restartSpeed;
+
+        StartCoroutine(SmoothedMoveRoutine(target, endPosition, duration, onReached));
     }
 
     public void BeginFramingCamera(float duration, System.Action onReached = null)
     {
+        // change to this room
+        sceneSingletons.CurrentRoom = this;
+
         Transform camera = sceneSingletons.MainCamera.transform;
 
         // frame camera around center
@@ -58,16 +81,15 @@ public class Room : MonoBehaviour
         () =>
         {
             sceneSingletons.PlayerMovement.SetGrabbed(false);
+
+            // reset positions
+            for (int i = 0; i < _resetPositionsOnRestart.Length; i++)
+                _resetPositionsOnRestart[i].position = _resetPositionsMemory[i];
         });
     }
 
     private IEnumerator SmoothedMoveRoutine(Transform moveTarget, Vector2 endPosition, float duration, System.Action onReached = null)
     {
-        // current time
-        float time = Time.time;
-        // end of movement time
-        float timeEnd = time + duration;
-        AnimationCurve curve = AnimationCurve.EaseInOut(time, 0, timeEnd, 1);
         Vector3 startPosition = moveTarget.position;
 
         bool handAnimated = (moveTarget == sceneSingletons.PlayerMovement.transform);
@@ -85,6 +107,12 @@ public class Room : MonoBehaviour
                 yield return null;
             }
         }
+
+        // current time (at this line of code, its start of move to endPosition animation)
+        float time = Time.time;
+        // end of movement time
+        float timeEnd = time + duration;
+        AnimationCurve curve = AnimationCurve.EaseInOut(time, 0, timeEnd, 1);
 
         while (time < timeEnd)
         {

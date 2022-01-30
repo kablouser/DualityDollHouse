@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class LightSourceDetection : MonoBehaviour
 {
-
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private float angle = 60.0f;
     [SerializeField] private Light2D lightObject;
+    [SerializeField] private SceneSingletons _sceneSingletons;
 
-    public event Action LightSourceDetectedEvent;
-    public event Action LightSourceUndetectedEvent;
     private bool detected = false;
     // Start is called before the first frame update
     void Start()
@@ -39,12 +34,13 @@ public class LightSourceDetection : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDirection);
                 if (hit.collider == playerCollider)
                 {
-                    hitReaction();
+                    // don't make red, red only for debug purposes
+                    //hitReaction();
                     if (!detected)
                     {
                         //change status to detected and broadcast event
                         detected = true;
-                        LightSourceDetectedEvent?.Invoke();
+                        _sceneSingletons.InvokeLightSourceDetectedEvent(gameObject);
                     }
                     return;
                 }
@@ -54,7 +50,7 @@ public class LightSourceDetection : MonoBehaviour
         {
             //change status to undetected
             detected = false;
-            LightSourceUndetectedEvent?.Invoke();
+            _sceneSingletons.InvokeLightSourceUndetectedEvent(gameObject);
         }
         lightObject.color = Color.white;
     }

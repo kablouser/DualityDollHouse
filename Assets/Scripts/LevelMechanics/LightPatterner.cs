@@ -18,9 +18,6 @@ public class LightPatterner : MonoBehaviour
     /// </summary>
     private int _patternLength;
 
-    [SerializeField]
-    public int exporsebeatNumber;
-
     private void Awake()
     {
         _patternLength = 0;
@@ -31,7 +28,7 @@ public class LightPatterner : MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        if(_sceneSingletons.musicBPM == 0)
+        if(_sceneSingletons.MusicBPM == 0)
         {
             Debug.LogWarning("Music BPM is set to 0 in sceneSingletons. That will not sync lights properly...");
         }
@@ -39,11 +36,9 @@ public class LightPatterner : MonoBehaviour
 
         // number of beats since music started
         int beatNumber = Mathf.FloorToInt(
-            _sceneSingletons.musicPlayer.time *
+            _sceneSingletons.MusicPlayer.time *
             // convert BPM to BPS (beats per second)
-            _sceneSingletons.musicBPM / 60.0f);
-
-        exporsebeatNumber = beatNumber;
+            _sceneSingletons.MusicBPM / 60.0f);
 
         // out of beat length
         int currentBeatID = beatNumber % _patternLength;

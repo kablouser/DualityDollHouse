@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 0}
   PlayerMovement: {fileID: 0}
-  musicPlayer: {fileID: 0}
-  musicBPM: 120
+  MusicPlayer: {fileID: 0}
+  MusicBPM: 120
+  CurrentRoom: {fileID: 0}
