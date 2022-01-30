@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private Collider2D _collider2D;
     [SerializeField] private SceneSingletons sceneSingletons;
+    [SerializeField] private Animator _animator;
 
     [Header("Variables")]
     [SerializeField] private float _walkTopSpeed;
@@ -40,6 +41,13 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.isKinematic = isGrabbed;
         _rigidbody2D.velocity = Vector2.zero;
         _collider2D.enabled = !isGrabbed;
+        _animator.enabled = !isGrabbed;
+    }
+
+    public bool IsMoving()
+    {
+        Vector2 velocity = _rigidbody2D.velocity;
+        return !Mathf.Approximately(velocity.x, 0.0f) || !Mathf.Approximately(velocity.y, 0.0f);
     }
 
     private void CalculateJumpVelocity()
@@ -97,8 +105,11 @@ public class PlayerMovement : MonoBehaviour
         sceneSingletons.LightSourceDetectedEvent -= LightSourceDetectedEvent;
     }
 
+    public bool DEBUG;
+
     private void Update()
     {
+        DEBUG = IsMoving();
         float verticalInput = Input.GetAxisRaw("Vertical");
         bool getVerticalDown = !isVerticalPressed && 0 < verticalInput;
         if (0 < verticalInput)
@@ -191,6 +202,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void LightSourceDetectedEvent(GameObject _)
     {
+        if (IsMoving() == false)
+            // if in Freeze frame skip detection
+            return;
+
         if (sceneSingletons.CurrentRoom)
             sceneSingletons.CurrentRoom.RestartRoom();
         else
