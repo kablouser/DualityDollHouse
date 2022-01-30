@@ -8,9 +8,10 @@ public class HandAnimationHandler : MonoBehaviour
     private Animator anim;
     [SerializeField] private Renderer _renderer;
     public bool animFinished = false;
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake()
     {
+        // needs to be set before room moves the hand on start
         anim = GetComponent<Animator>();
     }
 

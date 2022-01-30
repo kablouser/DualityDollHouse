@@ -97,8 +97,9 @@ MonoBehaviour:
   _collider2D: {fileID: 9136634743506673867}
   sceneSingletons: {fileID: 11400000, guid: 7f504d53970d9b6138f28d6a9751a6bd, type: 2}
   _walkTopSpeed: 5
-  _walkAcceleration: 10
-  _walkDeceleration: 20
+  _walkAcceleration: 20
+  _walkDeceleration: 40
+  _midairAcceleration: 10
   _jumpHeight: 2
 --- !u!1 &9136634743602541424
 GameObject:
@@ -150,7 +151,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

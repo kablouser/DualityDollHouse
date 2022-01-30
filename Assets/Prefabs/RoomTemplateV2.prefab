@@ -251,7 +251,6 @@ GameObject:
   - component: {fileID: 899292753771823234}
   - component: {fileID: 899292753771823232}
   - component: {fileID: 899292753771823235}
-  - component: {fileID: 899292753771823238}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -350,32 +349,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &899292753771823238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899292753771823237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 1
-  m_ApplyToSortingLayers: 00000000
-  m_ShapePath:
-  - {x: -7.5, y: -0.5, z: 0}
-  - {x: 7.5, y: -0.5, z: 0}
-  - {x: 7.5, y: 0.5, z: 0}
-  - {x: -7.5, y: 0.5, z: 0}
-  m_ShapePathHash: 0
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 44046
 --- !u!1 &899292753906498041
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f5ea1df38d352768d0308ccb8ec59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextRoom: {fileID: 899292755053280796}
+  nextRoom: {fileID: 0}
 --- !u!1 &899292754335154151
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,10 +942,14 @@ MonoBehaviour:
   Center: {x: -0.14622974, y: 1.1431751}
   _entranceRenderer: {fileID: 899292754810661418}
   sceneSingletons: {fileID: 11400000, guid: 7f504d53970d9b6138f28d6a9751a6bd, type: 2}
-  _isFirstRoom: 1
-  _restartDuration: 5
+  _isFirstRoom: 0
+  _restartSpeed: 7
   _cameraFrameDuration: 1
   _handObject: {fileID: 0}
+  _resetPositionsOnRestart:
+  - {fileID: 899292753570815165}
+  _resetPositionsMemory:
+  - {x: 0, y: 0, z: 0}
 --- !u!1 &7104661883328170698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1001,6 @@ MonoBehaviour:
     switchPattern: 00000100
   - light: {fileID: 7775357857944444690}
     switchPattern: 01000000
-  exporsebeatNumber: 0
 --- !u!1 &7104661884160320205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,7 +1142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0108936
+      value: 0.008780368
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1178,7 +1154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9999407
+      value: 0.9999615
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_PointLightInnerAngle
@@ -1190,7 +1166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_PointLightOuterRadius
-      value: 5.8284454
+      value: 6.4273286
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
@@ -1273,7 +1249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.05856836
+      value: -0.04354597
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1285,7 +1261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.99828345
+      value: 0.99905145
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_PointLightInnerAngle
@@ -1297,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_PointLightOuterRadius
-      value: 5.6737685
+      value: 6.366948
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
@@ -1380,7 +1356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0046825963
+      value: 0.031786162
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1392,7 +1368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809522, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.99998903
+      value: 0.99949473
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_Color.b
@@ -1416,7 +1392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684347659161809523, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}
       propertyPath: m_PointLightOuterRadius
-      value: 5.833492
+      value: 6.3761406
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc11163d434952f4ead9933c6eca21e7, type: 3}

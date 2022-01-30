@@ -6,6 +6,6 @@ public class MusicSetuper : MonoBehaviour
     [SerializeField] private SceneSingletons _sceneSingletons;
     private void Awake()
     {
-        _sceneSingletons.musicPlayer = _musicPlayer;
+        _sceneSingletons.MusicPlayer = _musicPlayer;
     }
 }
