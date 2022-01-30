@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool IsFrozen { get; private set; }
+
     public bool IsCarryingKey;
 
     [Header("References")]
@@ -25,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float _jumpHeight;
 
+    [Tooltip("The time needed with the player stopped to start freezing")]
+    [SerializeField] private float _timeToFreeze = 2.0f;
+
     /// <summary>
     /// contacts on rigidbody2D, gotten through rigidbody2D.GetContacts
     /// </summary>
@@ -38,6 +43,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isVerticalPressed;
 
+    /// <summary>
+    /// the beginning time at the latest period when stopped,
+    /// if IsMoving() is true, this is negative
+    /// </summary>
+    private float _stoppedMovingTime;
+
     public void SetGrabbed(bool isGrabbed)
     {
         _rigidbody2D.isKinematic = isGrabbed;
@@ -45,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         _collider2D.enabled = !isGrabbed;
         _animator.enabled = !isGrabbed;
         IsCarryingKey = false;
+        IsFrozen = true;
+        _stoppedMovingTime = Time.time;
     }
 
     public bool IsMoving()
@@ -91,6 +104,8 @@ public class PlayerMovement : MonoBehaviour
         sceneSingletons.MainCamera = Camera.main;
         sceneSingletons.PlayerMovement = this;
         IsCarryingKey = false;
+        IsFrozen = true;
+        _stoppedMovingTime = Time.time;
     }
 
     private void OnValidate()
@@ -135,6 +150,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // TODO
+    public bool IS_FROZEN;
+
     private void FixedUpdate()
     {
         UpdateIsGrounded();
@@ -143,6 +161,27 @@ public class PlayerMovement : MonoBehaviour
             MoveHorizontally(_walkAcceleration, _walkDeceleration);
         else
             MoveHorizontally(_midairAcceleration, 0);
+
+        if (IsMoving())
+        {
+            IsFrozen = false;
+            _stoppedMovingTime = -1;
+        }
+        else if (IsFrozen == false)
+        {
+            if (_stoppedMovingTime < 0)
+            {
+                // first frame of stopping
+                _stoppedMovingTime = Time.time;
+            }
+            else if (_stoppedMovingTime + _timeToFreeze < Time.time)
+            {
+                // sufficient time has passed
+                IsFrozen = true;
+            }
+        }
+
+        IS_FROZEN = IsFrozen;
     }
 
     private void MoveHorizontally(float acceleration, float decceleration)
@@ -205,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LightSourceDetectedEvent(GameObject _)
     {
-        if (IsMoving() == false)
+        if (IsFrozen)
             // if in Freeze frame skip detection
             return;
 

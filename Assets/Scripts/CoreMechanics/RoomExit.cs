@@ -30,6 +30,7 @@ public class RoomExit : MonoBehaviour
             {
                 player.transform.position = (Vector2)nextRoom.transform.position + nextRoom.EntrancePosition;
                 player.gameObject.SetActive(true);
+                nextRoom.CleanRoom();
             });
         }
     }

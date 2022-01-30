@@ -83,14 +83,18 @@ public class Room : MonoBehaviour
         () =>
         {
             sceneSingletons.PlayerMovement.SetGrabbed(false);
-
-            // reset positions
-            for (int i = 0; i < _resetPositionsOnRestart.Length; i++)
-                _resetPositionsOnRestart[i].position = _resetPositionsMemory[i];
-
-            foreach(GameObject setActive in _setActivesOnRestart)
-                setActive.SetActive(true);
+            CleanRoom();
         });
+    }
+
+    public void CleanRoom()
+    {
+        // reset positions
+        for (int i = 0; i < _resetPositionsOnRestart.Length; i++)
+            _resetPositionsOnRestart[i].position = _resetPositionsMemory[i];
+
+        foreach (GameObject setActive in _setActivesOnRestart)
+            setActive.SetActive(true);
     }
 
     private IEnumerator SmoothedMoveRoutine(Transform moveTarget, Vector2 endPosition, float duration, System.Action onReached = null)

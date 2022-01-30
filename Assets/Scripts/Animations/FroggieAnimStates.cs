@@ -5,6 +5,7 @@ public class FroggieAnimStates : MonoBehaviour
 {
     [SerializeField] private Animator _anim;
     [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private PlayerMovement _playerMovement;
 
     [Tooltip("Base multiplier for how fast you want the animation to play, gets faster as player moves faster")]
     [SerializeField] private float _movingBaseMultiplier = 1f;
@@ -63,7 +64,7 @@ public class FroggieAnimStates : MonoBehaviour
 
         //adjust animation parameters
         _isAirborne = !isGrounded;
-        _isMoving = Mathf.Abs(velocityX) > speedTolerance;
+        _isMoving = _playerMovement.IsFrozen == false;
         _anim.SetFloat("MovingMultiplier", Mathf.Abs(velocityX) * _movingBaseMultiplier);
 
         if (_isAirborne)
