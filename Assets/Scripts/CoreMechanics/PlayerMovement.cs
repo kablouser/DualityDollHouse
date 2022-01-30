@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpHeight;
 
     [Tooltip("The time needed with the player stopped to start freezing")]
-    [SerializeField] private float _timeToFreeze = 2.0f;
+    [SerializeField] private float _timeToFreeze = 0.0f;
 
     /// <summary>
     /// contacts on rigidbody2D, gotten through rigidbody2D.GetContacts
