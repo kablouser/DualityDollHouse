@@ -72,7 +72,10 @@ public class FroggieAnimStates : MonoBehaviour
         //adjust animation parameters
         _isAirborne = !isGrounded;
         _isMoving = _playerMovement.IsFrozen == false;
-        _anim.SetFloat("MovingMultiplier", Mathf.Abs(velocityX) * _movingBaseMultiplier);
+        _anim.SetFloat("MovingMultiplier",
+            // 0 multiplier causes transition issues
+            Mathf.Max(0.1f, Mathf.Abs(velocityX)) *
+            _movingBaseMultiplier);
 
         if (_isAirborne)
         {

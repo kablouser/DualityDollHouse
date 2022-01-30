@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073993, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1204,9 +1204,17 @@ PrefabInstance:
       propertyPath: _handObject
       value: 
       objectReference: {fileID: 1529661555}
+    - target: {fileID: 4496329180674408900, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
+      propertyPath: _isFirstRoom
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4496329180674408902, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
       propertyPath: m_Name
       value: TestRoom2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496329180674408902, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4496329180674408903, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
       propertyPath: m_RootOrder
@@ -1281,6 +1289,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 210766124, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 210766124, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb4feb80f222a76b99e9eebb76902b62, type: 3}
     - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: nextRoom
       value: 
@@ -1304,6 +1320,10 @@ PrefabInstance:
     - target: {fileID: 899292755053280798, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_Name
       value: RoomTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 899292755053280798, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 899292755053280799, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_RootOrder
@@ -1352,6 +1372,13 @@ PrefabInstance:
     - target: {fileID: 7104661884160320206, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_Intensity
       value: 0.2
+    - target: {fileID: 7104661883328170676, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: audioCueSwitchPattern.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104661883328170676, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: audioCueSwitchPattern.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7775357857881462361, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: playerCollider
