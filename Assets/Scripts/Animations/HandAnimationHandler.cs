@@ -7,8 +7,11 @@ public class HandAnimationHandler : MonoBehaviour
 
     private Animator anim;
     [SerializeField] private Renderer _renderer;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _grabSound;
+    [SerializeField] private AudioClip _releaseSound;
     public bool animFinished = false;
-    
+
     void Awake()
     {
         // needs to be set before room moves the hand on start
@@ -36,6 +39,18 @@ public class HandAnimationHandler : MonoBehaviour
     public void SetVisible(bool visible)
     {
         _renderer.enabled = visible;
+    }
+
+    public void PlaySoundGrab()
+    {
+        _audioSource.clip = _grabSound;
+        _audioSource.PlayDelayed(.3f);
+    }
+
+    public void PlaySoundDrop()
+    {
+        _audioSource.clip = _releaseSound;
+        _audioSource.Play();
     }
 
 }

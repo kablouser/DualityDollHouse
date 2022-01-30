@@ -110,6 +110,7 @@ public class Room : MonoBehaviour
               startPosition.y - 1.2f, -.81f);
 
             _handObject.PlayAnimSynchronous("PickUp");
+            _handObject.PlaySoundGrab();
 
             while (!_handObject.animFinished)
             {
@@ -139,6 +140,7 @@ public class Room : MonoBehaviour
         }
 
         _handObject.PlayAnimSynchronous("PutDown");
+        _handObject.PlaySoundDrop();
 
 
         moveTarget.position = endPosition;
