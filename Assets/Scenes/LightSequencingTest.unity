@@ -953,6 +953,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1327298015393710910, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4496329179908211876, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
       propertyPath: nextRoom
       value: 
