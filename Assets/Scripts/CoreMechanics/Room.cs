@@ -26,6 +26,8 @@ public class Room : MonoBehaviour
 
     [SerializeField] private GameObject[] _setActivesOnRestart;
 
+    [SerializeField] private GameObject[] _setActivesWhileInRoom;
+
     private void Start()
     {
         OnValidate();
@@ -40,6 +42,8 @@ public class Room : MonoBehaviour
             sceneSingletons.PlayerMovement.transform.position = (Vector2)transform.position + EntrancePosition;
             BeginFramingCamera(0);
         }
+        else
+            SetIsPlayerInRoom(false);
     }
 
     public void OnValidate()
@@ -95,6 +99,12 @@ public class Room : MonoBehaviour
 
         foreach (GameObject setActive in _setActivesOnRestart)
             setActive.SetActive(true);
+    }
+
+    public void SetIsPlayerInRoom(bool isPlayerInRoom)
+    {
+        foreach(GameObject target in _setActivesWhileInRoom)
+            target.SetActive(isPlayerInRoom);
     }
 
     private IEnumerator SmoothedMoveRoutine(Transform moveTarget, Vector2 endPosition, float duration, System.Action onReached = null)

@@ -15,6 +15,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -573252391973851513}
+  - {fileID: 7651250425118079202}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -69,6 +70,8 @@ AudioMixerController:
     name: MusicVolume
   - guid: 6ab162bf66999ad2c92c2485d801d07d
     name: SoundFX_Volume
+  - guid: 536cf7e430eeb0fab8215d36b1884411
+    name: mYpAAMR
   m_AudioMixerGroupViews:
   - guids:
     - e6b556d693307d1a88b310bb3eda730c
@@ -142,3 +145,27 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &7651250425118079202
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7ecf7e02527e65b168743fa676bbbace
+  m_EffectName: Echo
+  m_MixLevel: 1d264b3fd4cd77f529b6c4fafdd8d8e1
+  m_Parameters:
+  - m_ParameterName: Delay
+    m_GUID: 536cf7e430eeb0fab8215d36b1884411
+  - m_ParameterName: Decay
+    m_GUID: 86aaab1aaa331315d8039ba9117788fa
+  - m_ParameterName: Max channels
+    m_GUID: 261651bd9c5b16300b4db005f1117dcb
+  - m_ParameterName: Drymix
+    m_GUID: 69969bcc5324872ce92aadcc3bd0188c
+  - m_ParameterName: Wetmix
+    m_GUID: ce8337fcdd2aa1fc2b52fc6dd4643e61
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

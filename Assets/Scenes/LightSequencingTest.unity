@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.38073993, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -837,11 +837,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e9e62d1b8765d1586e0147ccf25633, type: 3}
---- !u!212 &2021234101 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 899292754029132671, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
-  m_PrefabInstance: {fileID: 7104661882735251572}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &899292754382392083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4496329180674408900, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
@@ -868,9 +863,17 @@ PrefabInstance:
       propertyPath: _handObject
       value: 
       objectReference: {fileID: 1529661555}
+    - target: {fileID: 4496329180674408900, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
+      propertyPath: _isFirstRoom
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4496329180674408902, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
       propertyPath: m_Name
       value: TestRoom2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4496329180674408902, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4496329180674408903, guid: 7b323d162dc89bd47b7c41e6c4848c54, type: 3}
       propertyPath: m_RootOrder
@@ -925,26 +928,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 210766124, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 210766124, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb4feb80f222a76b99e9eebb76902b62, type: 3}
     - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: nextRoom
       value: 
       objectReference: {fileID: 899292754382392083}
-    - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
-      propertyPath: _spriteRenderer
-      value: 
-      objectReference: {fileID: 2021234101}
-    - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
-      propertyPath: _sceneSingletons
-      value: 
-      objectReference: {fileID: 11400000, guid: 7f504d53970d9b6138f28d6a9751a6bd, type: 2}
-    - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
-      propertyPath: _lockedDoorSprite
-      value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 899292754029132668, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
-      propertyPath: _unlockedDoorSprite
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 899292755053280796, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: _handObject
       value: 
@@ -952,6 +947,10 @@ PrefabInstance:
     - target: {fileID: 899292755053280798, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_Name
       value: RoomTemplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 899292755053280798, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 899292755053280799, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_RootOrder
@@ -995,6 +994,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899292755053280799, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104661883328170676, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: audioCueSwitchPattern.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104661883328170676, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}
+      propertyPath: audioCueSwitchPattern.Array.data[3]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7775357857881462361, guid: 7f974fc0b54383440b3704440422a5bc, type: 3}

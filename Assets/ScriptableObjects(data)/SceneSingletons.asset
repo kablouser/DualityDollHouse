@@ -16,4 +16,4 @@ MonoBehaviour:
   PlayerMovement: {fileID: 0}
   MusicPlayer: {fileID: 0}
   MusicBPM: 120
-  CurrentRoom: {fileID: 0}
+  MusicBars: 4
