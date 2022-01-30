@@ -23,8 +23,6 @@ public class LightSourceDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         Bounds playerBounds = playerCollider.bounds;
         Vector3[] bboxCorners = {
             new Vector3(playerBounds.extents.x, playerBounds.extents.y),
